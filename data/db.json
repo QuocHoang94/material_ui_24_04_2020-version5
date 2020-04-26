@@ -1,0 +1,64 @@
+{
+    "tasks":[
+        {
+            "id":1,
+            "title":"Read book",
+            "description":"Learn Angularjs",
+            "status":0
+        },
+        {
+            "id":2,
+            "title":"Watching movie",
+            "description":"NetFlix",
+            "status":0
+        },
+        {
+            "id":3,
+            "title":"Playing game",
+            "description":"Call of duty",
+            "status":0
+        },
+        {
+            "id":4,
+            "title":"Head to the Playground",
+            "description":"Most communities provide a free park",
+            "status":1
+        },
+        {
+            "id":5,
+            "title":"Do Some Gardening",
+            "description":"Head into your garden!",
+            "status":1
+        },
+        {
+            "id":6,
+            "title":"Head to the Playground",
+            "description":"Most communities provide a free park",
+            "status":1
+        },
+        {
+            "id":7,
+            "title":"Visit Friends",
+            "description":"Organize to meet with friends",
+            "status":2
+        },
+        {
+            "id":8,
+            "title":"Volunteer at a Race Track",
+            "description":"Most communities provide a free park",
+            "status":2
+        },
+        {
+            "id":9,
+            "title":"Visit Free Museums",
+            "description":"Most communities provide a free park",
+            "status":2
+        },
+        {
+            "id":10,
+            "title":"Volunteer Work",
+            "description":"Consider doing some volunteer work for a charity.",
+            "status":2
+        }
+    ]
+}
