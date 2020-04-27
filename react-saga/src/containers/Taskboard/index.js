@@ -13,6 +13,7 @@ import { bindActionCreators } from 'redux';
 import * as taskActions from './../../actions/task';
 import PropTypes from 'prop-types';
 import { toast } from 'react-toastify';
+import SearchBox from '../../components/SearchBox';
 // const listTask = [
 //     { id: 1, title: "Readboook", description: "Read material book", status: 0 },
 //     { id: 2, title: "Watching movie", description: "on NetFlix", status: 2 },
@@ -61,6 +62,20 @@ class TaskBoard extends Component {
         const { fetchListTask } = taskActionCreators;
         fetchListTask();
     }
+    handeFilter = (e)=>{
+        console.log('e',e);
+        const {value} = e.target;
+        const { taskActionCreators } = this.props;
+        const { filterTask } = taskActionCreators;
+        filterTask(value);
+    }
+    renderSearchBox = () => {
+        let xhtml = null;
+        xhtml = (
+            <SearchBox handeChange={this.handeFilter}/>
+        );
+        return xhtml;
+    }
     render() {
         const { classes } = this.props;
         return (
@@ -68,10 +83,11 @@ class TaskBoard extends Component {
                 <Button variant="contained" color="primary" className={classes.button}>
                     <AddIcon /> Them moi cong viec
                 </Button>
-                <Button variant="contained" color="primary" className={classes.button} onClick={()=>this.loadData()}>
+                <Button variant="contained" color="primary" className={classes.button} onClick={() => this.loadData()}>
                     Load Data
                 </Button>
                 {/* <Box ml={1}><Button variant="contained" color="primary" onClick={() => this.showToast()}>showToast</Button></Box> */}
+                {this.renderSearchBox()}
                 {this.renderBoard()}
                 {this.renderForm()}
             </div>
@@ -79,8 +95,10 @@ class TaskBoard extends Component {
     }
 }
 TaskBoard.propTypes = {
+    classes: PropTypes.object,
     taskActionCreators: PropTypes.shape({
         fetchListTask: PropTypes.func,
+        filterTask: PropTypes.func,
     }),
     listTask: PropTypes.array
 }
