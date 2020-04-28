@@ -26,11 +26,11 @@ class TaskBoard extends Component {
             open: false
         }
     }
-    // componentDidMount() {
-    //     const { taskActionCreators } = this.props;
-    //     const { fetchListTask } = taskActionCreators;
-    //     fetchListTask();
-    // }
+    componentDidMount() {
+        const { taskActionCreators } = this.props;
+        const { fetchListTask } = taskActionCreators;
+        fetchListTask();
+    }
     renderBoard = () => {
         const { listTask } = this.props;
         let xhtml = null;
@@ -62,9 +62,9 @@ class TaskBoard extends Component {
         const { fetchListTask } = taskActionCreators;
         fetchListTask();
     }
-    handeFilter = (e)=>{
-        console.log('e',e);
-        const {value} = e.target;
+    handeFilter = (e) => {
+        console.log('e', e);
+        const { value } = e.target;
         const { taskActionCreators } = this.props;
         const { filterTask } = taskActionCreators;
         filterTask(value);
@@ -72,15 +72,21 @@ class TaskBoard extends Component {
     renderSearchBox = () => {
         let xhtml = null;
         xhtml = (
-            <SearchBox handeChange={this.handeFilter}/>
+            <SearchBox handeChange={this.handeFilter} />
         );
         return xhtml;
+    }
+    openForm = () => {
+        // const { taskActionCreators ,modalActionCreators} = this.props;
+        // const { showModal } = modalActionCreators;
+        // showModal();
+
     }
     render() {
         const { classes } = this.props;
         return (
             <div className={classes.taskboard}>
-                <Button variant="contained" color="primary" className={classes.button}>
+                <Button variant="contained" color="primary" className={classes.button} onClick={() => this.openForm()}>
                     <AddIcon /> Them moi cong viec
                 </Button>
                 <Button variant="contained" color="primary" className={classes.button} onClick={() => this.loadData()}>
