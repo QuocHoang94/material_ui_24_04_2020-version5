@@ -1,16 +1,17 @@
 import { createMuiTheme } from '@material-ui/core/styles';
 const theme = createMuiTheme({
     color:{
-        primary:"#032F2F",
+        primary:"#D32F2F",
         secondary:"#00BCD4",
-        error:"#F44336"
+        error:"#F44336",
+        textColor:"#FFFFFF"
     },
     typography:{
-        fontFamily:"Roboto"
+        fontFamily:"Roboto",
     },
     shape:{
         borderRadius:4,
-        background:"#757575",
+        background:"#781FA2",
         textColor:"#FFFFFF",
         border:"#CCCCCC"
     }

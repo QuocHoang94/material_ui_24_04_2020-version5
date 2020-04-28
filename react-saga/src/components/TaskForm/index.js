@@ -9,57 +9,54 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import PropTypes from 'prop-types';
+import CloseIcon from '@material-ui/icons/Clear';
 class TaskForm extends Component {
+    onClose = () => {
+
+    }
     render() {
-        const { open, classes, onClose } = this.props;
+        const { classes } = this.props;
         return (
-            <Modal open={true} onClose={onClose} >
-                <div className={classes.modal}>
-                    <form>
-                        <Grid container >
-                            <Grid item md={12}>
-                                <TextField
-                                    id="title"
-                                    label="Tiêu đề"
-                                    className={classes.textField}
-                                    margin="normal"
-                                    name="title"
+            <form>
+                <Grid container >
+                    <Grid item md={12}>
+                        <TextField
+                            id="title"
+                            label="Tiêu đề"
+                            className={classes.textField}
+                            margin="normal"
+                            name="title"
 
-                                />
-                            </Grid>
-                            <Grid item md={12}>
-                                <TextField
-                                    id="title"
-                                    label="Tiêu đề"
-                                    className={classes.textField}
-                                    margin="normal"
-                                    name="title"
+                        />
+                    </Grid>
+                    <Grid item md={12}>
+                        <TextField
+                            id="title"
+                            label="Mô Tả"
+                            className={classes.textField}
+                            margin="normal"
+                            name="title"
 
-                                />
-                            </Grid>
+                        />
+                    </Grid>
 
-                            <Grid item md={12}>
-                                <Box flexDirection="row-reverse" display="flex" mt={2}>
-                                    <Box ml={1}>
-                                        <Button variant="contained" color='primary'>Save</Button>
-                                    </Box>
+                    <Grid item md={12}>
+                        <Box flexDirection="row-reverse" display="flex" mt={2}>
+                            <Box ml={1}>
+                                <Button variant="contained" color='primary'>Save</Button>
+                            </Box>
 
-                                    <Button variant="contained" onClick={onClose}>Cancel</Button>
+                            <Button variant="contained" >Cancel</Button>
 
 
-                                </Box>
-                            </Grid>
-                        </Grid>
-                    </form>
-                </div>
-            </Modal>
+                        </Box>
+                    </Grid>
+                </Grid>
+            </form>
         )
     }
 }
 TaskForm.propTypes = {
-    open: PropTypes.bool,
     classes: PropTypes.object,
-    onClose: PropTypes.func
-
 }
 export default withStyles(styles)(TaskForm)

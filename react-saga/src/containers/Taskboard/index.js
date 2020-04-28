@@ -14,11 +14,10 @@ import * as taskActions from './../../actions/task';
 import PropTypes from 'prop-types';
 import { toast } from 'react-toastify';
 import SearchBox from '../../components/SearchBox';
-// const listTask = [
-//     { id: 1, title: "Readboook", description: "Read material book", status: 0 },
-//     { id: 2, title: "Watching movie", description: "on NetFlix", status: 2 },
-//     { id: 3, title: "Playing Game", description: "PS4", status: 1 }
-// ]
+import * as modalActions from './../../actions/modal';
+
+
+
 class TaskBoard extends Component {
     constructor(props) {
         super(props);
@@ -77,10 +76,12 @@ class TaskBoard extends Component {
         return xhtml;
     }
     openForm = () => {
-        // const { taskActionCreators ,modalActionCreators} = this.props;
-        // const { showModal } = modalActionCreators;
-        // showModal();
-
+        // them moi cong viec
+        const { modalActionCreators } = this.props;
+        const { showModal, hideModal, changeModalTitle, changeModalContent } = modalActionCreators;
+        showModal();
+        changeModalTitle('Them moi cong viec');
+        changeModalContent(<TaskForm />)
     }
     render() {
         const { classes } = this.props;
@@ -106,6 +107,12 @@ TaskBoard.propTypes = {
         fetchListTask: PropTypes.func,
         filterTask: PropTypes.func,
     }),
+    modalActionCreators: PropTypes.shape({
+        showModal: PropTypes.func,
+        hideModal: PropTypes.func,
+        changeModalTitle: PropTypes.func,
+        changeModalContent: PropTypes.func
+    }),
     listTask: PropTypes.array
 }
 const mapStateToProps = state => {
@@ -115,7 +122,8 @@ const mapStateToProps = state => {
 };
 const mapDispatchToProps = dispatch => {
     return {
-        taskActionCreators: bindActionCreators(taskActions, dispatch)
+        taskActionCreators: bindActionCreators(taskActions, dispatch),
+        modalActionCreators: bindActionCreators(modalActions, dispatch)
     }
 }
 export default withStyles(styles)(connect(mapStateToProps, mapDispatchToProps)(TaskBoard));
