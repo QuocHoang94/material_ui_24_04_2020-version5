@@ -10,15 +10,15 @@ import styles from './styles';
 class CommonModal extends Component {
     render() {
         const { classes, open, component, modalActionCreators, title } = this.props;
-        // const {hideModal} = modalActionCreators;
+        const {hideModal} = modalActionCreators;
         return (
-            <Modal open={open} >
+            <Modal open={open} onClose={hideModal}>
                 <div className={classes.modal}>
                     <div className={classes.header}>
                         <span className={classes.title}>
                             {title}
                         </span>
-                        <CloseIcon className={classes.icon}  />
+                        <CloseIcon className={classes.icon}  onClick={hideModal}/>
                     </div>
                     <div className={classes.content}>
                         {component}
@@ -44,8 +44,10 @@ const mapStateToProps = state => ({
     title:state.modal.title
 });
 const mapDispatchToProps = dispatch => {
-    modalActionCreators: bindActionCreators(modalActions, dispatch)
-}
+    return {
+      modalActionCreators: bindActionCreators(modalActions, dispatch),
+    };
+  };
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
 export default compose(
     withStyles(styles),
