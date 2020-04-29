@@ -10,12 +10,16 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import PropTypes from 'prop-types';
 import CloseIcon from '@material-ui/icons/Clear';
+import { connect } from 'react-redux';
+import { bindActionCreators, compose } from 'redux';
+import * as modalActions from './../../actions/modal';
 class TaskForm extends Component {
     onClose = () => {
 
     }
     render() {
-        const { classes } = this.props;
+        const { classes, modalActionCreators } = this.props;
+        const { hideModal } = modalActionCreators;
         return (
             <form>
                 <Grid container >
@@ -42,13 +46,10 @@ class TaskForm extends Component {
 
                     <Grid item md={12}>
                         <Box flexDirection="row-reverse" display="flex" mt={2}>
+                            <Button variant="contained" onClick={hideModal}>Cancel</Button>
                             <Box ml={1}>
                                 <Button variant="contained" color='primary'>Save</Button>
                             </Box>
-
-                            <Button variant="contained" >Cancel</Button>
-
-
                         </Box>
                     </Grid>
                 </Grid>
@@ -58,5 +59,19 @@ class TaskForm extends Component {
 }
 TaskForm.propTypes = {
     classes: PropTypes.object,
+    modalActionCreators: PropTypes.shape({
+        hideModal: PropTypes.func,
+    }),
 }
-export default withStyles(styles)(TaskForm)
+
+const mapStateToProps = null;
+const mapDispatchToProps = dispatch => {
+    return {
+        modalActionCreators: bindActionCreators(modalActions, dispatch),
+    };
+};
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
+export default compose(
+    withStyles(styles),
+    withConnect
+)(TaskForm);

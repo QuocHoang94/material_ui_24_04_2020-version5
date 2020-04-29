@@ -7,7 +7,7 @@ import AddIcon from '@material-ui/icons/Add';
 import Grid from '@material-ui/core/Grid';
 import { STATUS } from '../../constants';
 import TaskList from '../../components/TaskList';
-import TaskForm from '../../components/TaskForm';
+import TaskForm from '../../containers/TaskForm';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as taskActions from './../../actions/task';
@@ -96,7 +96,9 @@ class TaskBoard extends Component {
                 {/* <Box ml={1}><Button variant="contained" color="primary" onClick={() => this.showToast()}>showToast</Button></Box> */}
                 {this.renderSearchBox()}
                 {this.renderBoard()}
-                {this.renderForm()}
+
+                {/* renden thua form input */}
+                {/* {this.renderForm()} */}
             </div>
         )
     }
