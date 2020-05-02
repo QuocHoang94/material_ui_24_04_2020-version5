@@ -1,4 +1,3 @@
-import { ThemeProvider } from "@material-ui/core";
 const styles = (theme) => ({
     modal: {
         top: '50%',
