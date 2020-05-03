@@ -42,14 +42,14 @@ class TaskBoard extends Component {
         changeModalContent(<TaskForm />)
     }
 
-    handleDeleteTask = (task) =>{
-        const {id} = task;
+    handleDeleteTask = (task) => {
+        const { id } = task;
         const { taskActionCreators } = this.props;
-        const {deleteTask } = taskActionCreators;
+        const { deleteTask } = taskActionCreators;
         deleteTask(id);
     }
     showModalDeleteTask = (task) => {
-        const { taskActionCreators, modalActionCreators,classes } = this.props;
+        const { taskActionCreators, modalActionCreators, classes } = this.props;
         const {
             showModal,
             hideModal,
@@ -69,8 +69,8 @@ class TaskBoard extends Component {
                         <Button variant="contained" onClick={hideModal}>No</Button>
                     </Box>
                     <Box ml={1}>
-                        <Button variant="contained" color="primary" onClick={()=>this.handleDeleteTask(task)}>
-                                Yes
+                        <Button variant="contained" color="primary" onClick={() => this.handleDeleteTask(task)}>
+                            Yes
                         </Button>
                     </Box>
                 </Box>

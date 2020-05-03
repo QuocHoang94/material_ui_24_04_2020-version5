@@ -10,19 +10,42 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import GlobalLoading from '../../components/GlobalLoading';
 import Modal from '../../components/Modal';
+import { BrowserRouter, Switch, Route } from 'react-router-dom'
+import { ADMIN_ROUTES } from '../../constants';
+import AdminLayoutRoute from '../../commons/Layout/AdminLayoutRoute';
+
 const store = configureStore();
+
 class App extends Component {
+  renderAdminRoutes = () => {
+    let xhtml = null;
+    console.log('ADMIN_ROUTES:', ADMIN_ROUTES);
+    xhtml = ADMIN_ROUTES.map(route => {
+      return (
+        <AdminLayoutRoute
+          key={route.path}
+          path={route.path}
+          component={route.component}
+          exact={route.exact}
+          name={route.name}
+        />
+      );
+    });
+    return xhtml;
+  }
   render() {
     // console.log("props", this.props);
     // const { classes } = this.props;
     return (
       <Provider store={store}>
-        <ThemeProvider theme={theme}>
-          <ToastContainer />
-          <GlobalLoading />
-          <Modal/>
-          <Taskboard />
-        </ThemeProvider>
+        <BrowserRouter>
+          <ThemeProvider theme={theme}>
+            <ToastContainer />
+            <GlobalLoading />
+            <Modal />
+            <Switch>{this.renderAdminRoutes()}</Switch>
+          </ThemeProvider>
+        </BrowserRouter>
       </Provider>
     );
   }
