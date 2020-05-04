@@ -1,3 +1,4 @@
+import React from 'react';
 import AdminHomePage from '../containers/AdminHomePage';
 import Taskboard from '../containers/Taskboard';
 export const API_ENDPOINT ='http://localhost:3000';
@@ -25,6 +26,6 @@ export const ADMIN_ROUTES = [
     {
       name: 'Quản lý công việc',
       path: '/task-board',
-      component: Taskboard,
+      component: () => <Taskboard />,
     },
   ];
