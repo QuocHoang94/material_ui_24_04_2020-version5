@@ -24,26 +24,28 @@ class Header extends Component {
         super(props);
         this.state = {
             mobileMoreAnchorEl: null,
-            isMobileMenuOpen: false,
-            anchorEl:null,
-            isMenuOpen:false,
+            // isMobileMenuOpen: false,
+            anchorEl: null,
+            // isMenuOpen:false,
         }
     }
 
-    handleProfileMenuOpen = () => {
-        console.log('handleProfileMenuOpen');
+    handleProfileMenuOpen = e => {
+        this.setState({
+            anchorEl: e.currentTarget,
+        })
     }
-    handleMobileMenuOpen = () => {
-        console.log('handleProfileMenuOpen');
+    handleMobileMenuOpen = e => {
+        this.setState({
+            anchorEl: e.currentTarget,
+        })
     }
     handleMobileMenuClose = () => {
         console.log('handleMobileMenuClose')
     }
-    handleProfileMenuOpen = () => {
-        console.log('handleMobileMenuClose')
-    }
     renderMobileMenu = () => {
-        const { mobileMoreAnchorEl, isMobileMenuOpen } = this.state;
+        const { mobileMoreAnchorEl } = this.state;
+        const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
         return (
             <Menu
                 anchorEl={mobileMoreAnchorEl}
@@ -51,31 +53,16 @@ class Header extends Component {
                 id={mobileMenuId}
                 keepMounted
                 transformOrigin={{ vertical: 'top', horizontal: 'right' }}
-                open={this.isMobileMenuOpen}
+                open={isMobileMenuOpen}
                 onClose={() => this.handleMobileMenuClose()}
             >
-                <MenuItem>
-                    <IconButton aria-label="show 4 new mails" color="inherit">
-                        <Badge badgeContent={4} color="secondary">
-                            <MailIcon />
-                        </Badge>
-                    </IconButton>
-                    <p>Messages</p>
-                </MenuItem>
-                <MenuItem>
-                    <IconButton aria-label="show 11 new notifications" color="inherit">
-                        <Badge badgeContent={11} color="secondary">
-                            <NotificationsIcon />
-                        </Badge>
-                    </IconButton>
-                    <p>Notifications</p>
-                </MenuItem>
-                <MenuItem onClick={this.handleProfileMenuOpen()}>
+                <MenuItem >
                     <IconButton
                         aria-label="account of current user"
                         aria-controls="primary-search-account-menu"
                         aria-haspopup="true"
                         color="inherit"
+                        onClick={this.handleProfileMenuOpen}
                     >
                         <AccountCircle />
                     </IconButton>
@@ -86,11 +73,14 @@ class Header extends Component {
     }
 
 
-    handleMenuClose = ()=>{
-        console.log('handleMenuClose');
+    handleMenuClose = () => {
+        this.setState({
+            anchorEl: null
+        })
     }
     renderMenu = () => {
-        const {anchorEl,isMenuOpen} = this.state;
+        const { anchorEl } = this.state;
+        const isMenuOpen = Boolean(anchorEl);
         return (
             <Menu
                 anchorEl={anchorEl}
@@ -101,13 +91,12 @@ class Header extends Component {
                 open={isMenuOpen}
                 onClose={this.handleMenuClose}
             >
-                <MenuItem onClick={this.handleMenuClose}>Profile</MenuItem>
-                <MenuItem onClick={this.handleMenuClose}>My account</MenuItem>
+                <MenuItem onClick={this.handleMenuClose}>Logout</MenuItem>
             </Menu>
         )
     }
     render() {
-        const { classes } = this.props;
+        const { classes,name } = this.props;
         return (
             <div>
                 <AppBar position="static">
@@ -121,9 +110,9 @@ class Header extends Component {
                             <MenuIcon />
                         </IconButton>
                         <Typography className={classes.title} variant="h6" noWrap>
-                            Material-UI
-          </Typography>
-                        <div className={classes.search}>
+                            {name}
+                        </Typography>
+                        {/* <div className={classes.search}>
                             <div className={classes.searchIcon}>
                                 <SearchIcon />
                             </div>
@@ -135,19 +124,9 @@ class Header extends Component {
                                 }}
                                 inputProps={{ 'aria-label': 'search' }}
                             />
-                        </div>
+                        </div> */}
                         <div className={classes.grow} />
                         <div className={classes.sectionDesktop}>
-                            <IconButton aria-label="show 4 new mails" color="inherit">
-                                <Badge badgeContent={4} color="secondary">
-                                    <MailIcon />
-                                </Badge>
-                            </IconButton>
-                            <IconButton aria-label="show 17 new notifications" color="inherit">
-                                <Badge badgeContent={17} color="secondary">
-                                    <NotificationsIcon />
-                                </Badge>
-                            </IconButton>
                             <IconButton
                                 edge="end"
                                 aria-label="account of current user"
@@ -180,5 +159,6 @@ class Header extends Component {
 }
 Header.propTypes = {
     classes: PropTypes.object,
+    name: PropTypes.string,
 }
 export default withStyles(styles)(Header)
