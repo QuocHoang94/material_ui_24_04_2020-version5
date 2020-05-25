@@ -6,19 +6,23 @@ import Header from './Header';
 import Sidebar from './Sidebar';
 class Dashboard extends Component {
     render() {
-        const {children,classes,name} = this.props;
+        const { children, classes, name } = this.props;
         return (
             <div className={classes.dashboard}>
-                <Header name={name}/>
-                <Sidebar/>
-                {children}
+                <Header name={name} />
+                <div className={classes.wrapper}>
+                    <Sidebar />
+                    <div className={classes.wrapperContent}>
+                        {children}
+                    </div>
+                </div>
             </div>
         )
     }
 }
-Dashboard.propTypes={
+Dashboard.propTypes = {
     children: PropTypes.object,
     classes: PropTypes.object,
-    name:PropTypes.string,
+    name: PropTypes.string,
 }
 export default withStyles(styles)(Dashboard)
