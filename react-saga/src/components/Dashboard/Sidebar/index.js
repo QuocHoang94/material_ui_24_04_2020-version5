@@ -6,17 +6,13 @@ import { ADMIN_ROUTES } from './../../../constants/index';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import PropTypes from 'prop-types';
+import { NavLink } from 'react-router-dom';
 class Sidebar extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            open: true,
-        }
-    }
     toggleDrawer = (value) => {
-        this.setState({
-            open: value
-        })
+        const {onToggleSidebar} = this.props;
+        if(onToggleSidebar){
+            onToggleSidebar(value);
+        }
     }
     renderList() {
         const { classes } = this.props;
@@ -26,9 +22,16 @@ class Sidebar extends Component {
                 <List component="div">
                     {ADMIN_ROUTES.map(item => {
                         return (
-                            <ListItem key={item.path} className={classes.menuItem} button>
-                                {item.name}
-                            </ListItem>
+                            <NavLink 
+                            to={item.path} 
+                            exact={item.exact} 
+                            className={classes.menuLink} 
+                            activeClassName={classes.menuLinkActive} 
+                            key={item.path}>
+                                <ListItem className={classes.menuItem} button>
+                                    {item.name}
+                                </ListItem>
+                            </NavLink>
                         )
                     })}
                 </List>
@@ -37,11 +40,10 @@ class Sidebar extends Component {
         return xhtml;
     }
     render() {
-        const { open } = this.state;
-        const {classes} = this.props;
+        const { classes,showSidebar } = this.props;
         return (
             <Drawer
-                open={open}
+                open={showSidebar}
                 onClose={() => this.toggleDrawer(false)}
                 classes={{
                     paper: classes.drawerPaper,
@@ -55,5 +57,7 @@ class Sidebar extends Component {
 }
 Sidebar.propTypes = {
     classes: PropTypes.object,
+    showSidebar: PropTypes.bool,
+    onToggleSidebar: PropTypes.func,
 }
 export default withStyles(styles)(Sidebar)
