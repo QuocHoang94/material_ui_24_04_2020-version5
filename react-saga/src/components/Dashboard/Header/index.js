@@ -16,7 +16,7 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
-
+import {withRouter} from 'react-router';
 const menuId = 'primary-search-account-menu';
 const mobileMenuId = 'primary-search-account-menu-mobile';
 class Header extends Component {
@@ -84,6 +84,12 @@ class Header extends Component {
             onToggleSidebar(!showSidebar);
         }
     }
+    handleLogout = ()=>{
+        const {history} = this.props;
+        if(history){
+            history.push('/login');
+        }
+    }
     renderMenu = () => {
         const { anchorEl } = this.state;
         const isMenuOpen = Boolean(anchorEl);
@@ -97,7 +103,7 @@ class Header extends Component {
                 open={isMenuOpen}
                 onClose={this.handleMenuClose}
             >
-                <MenuItem onClick={this.handleMenuClose}>Logout</MenuItem>
+                <MenuItem onClick={this.handleLogout}>Logout</MenuItem>
             </Menu>
         )
     }
@@ -168,5 +174,6 @@ Header.propTypes = {
     classes: PropTypes.object,
     name: PropTypes.string,
     showSidebar: PropTypes.bool,onToggleSidebar:PropTypes.func,
+    history:PropTypes.object,
 }
-export default withStyles(styles)(Header)
+export default withStyles(styles)(withRouter(Header));
